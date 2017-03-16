@@ -30,8 +30,8 @@ function! pants#Pants(...)
   let errorformat_old=&errorformat
   let &makeprg = "./pants --no-colors " . goal . " " . args . " " . target
   let &errorformat = "
-      \%E\ %#[error]\ %f:%l:\ %m,%Z\ %#[error]\ %p^,%-C %#[error]\ %m,
-      \%W\ %#[warn]\ %f:%l:\ %m,%Z\ %#[warn]\ %p^,%-C %#[warn]\ %m,
+      \%E\ %#[error]\ %f:%l:%c:\ %m,%Z\ %#[error]\ %p^,%-C %#[error]\ %m,
+      \%W\ %#[warn]\ %f:%l:%c:\ %m,%Z\ %#[warn]\ %p^,%-C %#[warn]\ %m,
       \%E\ %#%n)\ %m,
       \%-G%.%#"
 
