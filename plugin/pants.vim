@@ -6,5 +6,5 @@ command! -nargs=* -complete=file Pants call pants#Pants(<f-args>)
 
 augroup junit
   autocmd!
-  autocmd BufRead,BufNewFile *Test.scala,*Spec.scala command! -buffer Junit :Pants test.junit . --test-junit-output-mode=FAILURE_ONLY --test=%:p
+  autocmd BufRead,BufNewFile *Test.scala,*Spec.scala command! -nargs=? -buffer Junit call pants#Junit(<f-args>)
 augroup END

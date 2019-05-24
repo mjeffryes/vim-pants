@@ -49,3 +49,22 @@ function! pants#Pants(...)
     cd -
   endtry
 endfunction
+
+function! pants#Junit(...)
+  let path = bufname("%")
+  let start_i = strridx(path, "/com/") + 1
+  let end_i = strridx(path, ".") - 1 " drop the file extension
+  let classname = substitute(path[start_i:end_i], "/", ".", "g")
+
+  if a:0 == 0
+    let test = classname
+  elseif stridx(a:1, ".") == -1
+    "drop the classname to get just the package
+    let package = split(classname, '\.')[0:-2]
+    let test = join(package + [a:1], ".")
+  else
+    let test = a:1
+  endif
+
+  call pants#Pants("test.junit", ".", "--test-junit-output-mode=FAILURE_ONLY", "--test=" . test)
+endfunction
